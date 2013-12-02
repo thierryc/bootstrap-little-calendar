@@ -1,0 +1,194 @@
+/*
+ *
+ * bootstrap-little-calendar plugin
+ * Licensed under the MIT license
+ *
+ */
+ 
+
+// Core variables and mixins
+/* variables */
+@import "../bower_components/bootstrap/less/variables.less";
+/* bootstrap/less/mixins */
+@import "../bower_components/bootstrap/less/mixins.less";
+
+@icon-font-path: "../fonts/glyphicons/";
+@mainBrandColor: @brand-primary;
+@calendar-bg: #ffffff;
+@calendar-day: @gray-lighter;
+
+.bootstrap-little-calendar  {
+
+  table-layout:fixed;
+  
+	.year {
+		color: rgba(0, 0, 0, 0.3);
+		font-size: 1.5em;
+		float: right;
+		margin-right: 9px;
+	}
+	
+	TABLE {
+		width: 100%;
+	}
+
+	.month {
+		color: rgba(0, 0, 0, 0.3);
+		font-size: 1.5em;
+		float: left;
+		margin-left: 9px;
+	}
+
+	TH {
+		color: rgba(0, 0, 0, 0.3);
+		text-align: center;
+		border: none;
+		box-shadow: none;
+		height: 30px;
+	}
+
+	.calendar-header {
+		background-color:@mainBrandColor;
+		th{
+			color:@calendar-bg;
+		}
+	}
+	
+	.date-header {
+		background-color:lighten(@mainBrandColor,10%);
+		padding-top: 8px;
+		padding-bottom: 28px;
+	}
+	
+	TD {
+		height: 28px;
+	}
+
+	TD, 
+	TD.day {
+		color: rgba(0, 0, 0, 0.3);
+		text-align: center;
+		.transition(e('border 0.2s linear 0s, box-shadow 0.2s linear 0s, background 0.2s linear 0s'));
+		border: 1px solid rgba(0, 0, 0, 0.1);
+		border-color: @calendar-day;
+		width: 15%;
+	}
+	
+	TD.day:hover{
+		background: @calendar-day;
+		outline: 0 none;
+		cursor: pointer;
+		color: #FFFFFF;
+	}
+
+	TD.weekend {
+		color: rgba(0, 0, 0, 0.1);
+	}
+
+	TD.today {
+		border: 0;
+		font-weight:bold;
+		color: rgba(0, 0, 0, 0.60);
+	}
+
+	TD.today:hover{
+		background: @mainBrandColor;
+		outline: 0 none;
+		cursor: pointer;
+		color: #FFFFFF;
+	}
+
+	TD SPAN.weekday{
+		background-color: rgba(0, 0, 0, 0.1);
+		border-radius: 14%;
+		color: #FFFFFF;
+		font-size: 32px;
+		font-weight: bold;
+		padding: 2px 4px 2px;
+		white-space: nowrap;
+	}
+
+	TD SPAN.weekday:hover{
+		background-color: rgba(0, 0, 0, 0.25);
+	}
+
+	TFOOT, 
+	TFOOT TR TH.sel {
+		height: 27px;
+		width: 50px;
+		color: rgba(0, 0, 0, 0.3);
+		text-align: center;
+		.transition(e('border 0.2s linear 0s, background 0.2s linear 0s'));
+		border: 1px solid rgba(0, 0, 0, 0.1);
+		border-color: rgba(0, 0, 0, 0.1);
+		cursor:pointer;
+	}
+
+	TFOOT TR TH.sel:hover {
+		background: rgba(0, 0, 0, 0.1);
+		outline: 0 none;
+		cursor: pointer;
+		color: #FFFFFF;
+	}
+	TFOOT{
+		height:30px;
+	}
+
+	.arrow{
+		padding:0;
+		i{
+			margin-top:8px;
+		}
+	}
+	
+	.icon-arrow-left {
+		display: inline-block;
+		width: 6px;
+		height: 12px;
+		background-image: url("../img/icon-arrow-left.png");
+	}
+	.icon-arrow-right {
+		display: inline-block;
+		width: 6px;
+		height: 12px;
+		background-image: url("../img/icon-arrow-right.png");
+	}
+	.day.event {
+		background-color:lighten(@mainBrandColor,10%);
+		border:none;
+		color:@calendar-bg;
+	}
+
+	.day.event:hover {
+		background-color:@mainBrandColor;
+	}
+	.calendar-body{
+		background-color:#FFF;
+	}
+	td.new,td.old{
+		background-color:@calendar-day;
+	}
+}
+
+
+@media (min-width: 768px) and (max-width: 979px) {
+	.bootstrap-little-calendar {
+		td{
+			height: 16px;
+		}
+		td.day{
+			height: 16px;
+		}
+	}
+}
+
+@media (min-width: 1200px) {
+	.bootstrap-little-calendar {
+		td {
+			height: 45px;
+		}
+		td.day{
+			height: 45px;
+		}
+	}
+}
