@@ -228,7 +228,7 @@ module.exports = function (grunt) {
         }, {
           expand: true,
           dot: true,
-          cwd: '<%= autreplanete.app %>/bower_components/bootstrap/fonts/',
+          cwd: '<%= autreplanete.app %>/components/bootstrap/fonts/',
           dest: '<%= autreplanete.app %>/fonts/glyphicons',
           src: ['*']
         }]

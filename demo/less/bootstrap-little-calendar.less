@@ -5,12 +5,11 @@
  *
  */
  
-
 // Core variables and mixins
 /* variables */
-@import "../bower_components/bootstrap/less/variables.less";
+@import "../components/bootstrap/less/variables.less";
 /* bootstrap/less/mixins */
-@import "../bower_components/bootstrap/less/mixins.less";
+@import "../components/bootstrap/less/mixins.less";
 
 @icon-font-path: "../fonts/glyphicons/";
 @mainBrandColor: @brand-primary;
@@ -42,7 +41,6 @@
 	TH {
 		color: rgba(0, 0, 0, 0.3);
 		text-align: center;
-		border: none;
 		box-shadow: none;
 		height: 30px;
 	}
@@ -71,7 +69,7 @@
 		.transition(e('border 0.2s linear 0s, box-shadow 0.2s linear 0s, background 0.2s linear 0s'));
 		border: 1px solid rgba(0, 0, 0, 0.1);
 		border-color: @calendar-day;
-		width: 15%;
+		width: 14.286%;
 	}
 	
 	TD.day:hover{
@@ -86,7 +84,6 @@
 	}
 
 	TD.today {
-		border: 0;
 		font-weight:bold;
 		color: rgba(0, 0, 0, 0.60);
 	}
@@ -155,7 +152,6 @@
 	}
 	.day.event {
 		background-color:lighten(@mainBrandColor,10%);
-		border:none;
 		color:@calendar-bg;
 	}
 

@@ -27,7 +27,6 @@
 .bootstrap-little-calendar TH {
   color: rgba(0, 0, 0, 0.3);
   text-align: center;
-  border: none;
   box-shadow: none;
   height: 30px;
 }
@@ -53,7 +52,7 @@
   transition: border 0.2s linear 0s, box-shadow 0.2s linear 0s, background 0.2s linear 0s;
   border: 1px solid rgba(0, 0, 0, 0.1);
   border-color: #eeeeee;
-  width: 15%;
+  width: 14.286%;
 }
 .bootstrap-little-calendar TD.day:hover {
   background: #eeeeee;
@@ -65,7 +64,6 @@
   color: rgba(0, 0, 0, 0.1);
 }
 .bootstrap-little-calendar TD.today {
-  border: 0;
   font-weight: bold;
   color: rgba(0, 0, 0, 0.6);
 }
@@ -128,7 +126,6 @@
 }
 .bootstrap-little-calendar .day.event {
   background-color: #6aa3d5;
-  border: none;
   color: #ffffff;
 }
 .bootstrap-little-calendar .day.event:hover {
