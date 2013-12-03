@@ -99,28 +99,38 @@ module.exports = function (grunt) {
       ]
     },
     less: {
-      main: {
+      min: {
         files: {
-          '<%= autreplanete.app %>/css/main.css': ['<%= autreplanete.app %>/less/main.less'],
+          '<%= autreplanete.dist %>/css/main.min.css': ['<%= autreplanete.app %>/less/main.less'],
+          '<%= autreplanete.dist %>/css/bootstrap-little-calendar.min.css': ['<%= autreplanete.app %>/less/bootstrap-little-calendar.less']
         },
         options: {
-          sourceMap: true,
-          sourceMapFilename: '<%= autreplanete.app %>/less/main.css.map',
-          sourceMapBasepath: '<%= autreplanete.app %>/',
-          sourceMapRootpath: '/'
+          compress: true,
+          report: 'gzip'
         }
       },
-      calendar: {
+      dist: {
         files: {
+          '<%= autreplanete.dist %>/css/main.css': ['<%= autreplanete.app %>/less/main.less'],
+          '<%= autreplanete.dist %>/css/bootstrap-little-calendar.css': ['<%= autreplanete.app %>/less/bootstrap-little-calendar.less']
+        },
+        options: {
+          compress: false
+        }
+      },
+      server: {
+        files: {
+          '<%= autreplanete.app %>/css/main.css': ['<%= autreplanete.app %>/less/main.less'],
           '<%= autreplanete.app %>/css/bootstrap-little-calendar.css': ['<%= autreplanete.app %>/less/bootstrap-little-calendar.less']
         },
         options: {
           sourceMap: true,
-          sourceMapFilename: '<%= autreplanete.app %>/less/bootstrap-little-calendar.css.map',
+          sourceMapFilename: '<%= autreplanete.app %>/less/all.css.map',
           sourceMapBasepath: '<%= autreplanete.app %>/',
           sourceMapRootpath: '/'
         }
       }
+      
     },
     // not used since Uglify task does concat,
     // but still available if needed
@@ -251,7 +261,7 @@ module.exports = function (grunt) {
 
     grunt.task.run([
       'clean:server',
-      'less',
+      'less:server',
       'copy:server',
       'connect:livereload',
       'watch'
@@ -265,7 +275,7 @@ module.exports = function (grunt) {
 
   grunt.registerTask('test', [
     'clean:server',
-    'less',
+    'less:dist',
     'copy:server',
     'connect:test'
   ]);
@@ -275,6 +285,7 @@ module.exports = function (grunt) {
     'copy:server',
     'useminPrepare',
     'concurrent',
+    'less:min',
     //'cssmin',
     'concat',
     'uglify',
