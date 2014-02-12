@@ -63,8 +63,8 @@ $('#little-calendar-french').calendar({
       </div>
        <div class="row">
 				<div class="col-md-6">
-					<h2>Example Theme</h2>
-					<div id="little-calendar-google" class="bootstrap-little-calendar"></div>
+					<h2>Example in chinese</h2>
+					<div id="little-calendar-chinese" class="bootstrap-little-calendar"></div>
 				</div>
 				<div class="col-md-6">
 					<h2>Features</h2>
@@ -183,6 +183,20 @@ $('#little-calendar-french').calendar({
       			// 
     			});
 	
+	
+				$('#little-calendar-chinese').calendar({ 
+						//'events': {},
+						'weekStart': 1,
+						'days': ["星期天", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"],
+						'months': ["一月","二月","三月","四月","五月","六月","七月","八月","九月","十月","十一月","十二月"],
+						'todayString': "Aujourd‘hui"
+					})
+					.on('onInit', function(calendar){
+      			getEvents(calendar);
+    			})
+					.on('onClickEvent', function(e){
+      			// 
+    			});
 				$('.bootstrap-little-calendar')
 					.on('eventUpdated', function(event){ 
 						
