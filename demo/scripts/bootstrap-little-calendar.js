@@ -49,25 +49,30 @@
         click: $.proxy(this.click, this)
       });
     
-    this.date = this.options.date || new Date();
+    this.date = this.options.date || new Date();
     this.init(this.date);
   };
 
   Calendar.prototype = {
   
     init: function (date) {
+      var that = this;
       // Render Days of Week
       this.__renderDays();
       // Render Calendar
       this.__renderCalendar(date);
       
-      this.$element.on('setEvents.calendar', function (events) {
-        this.setEvents(events);
+      this.$element.on('setEvents.calendar', function (target, events) {
+        that.setEvents(events);
       });
       
       this.$element.on('next.calendar', this.next);
       this.$element.on('current.calendar', this.current);
       this.$element.on('prev.calendar', this.prev);
+      
+      setTimeout(function(){
+        that.$element.trigger('onInit', that)
+      },0);
       
     },
     
@@ -135,7 +140,7 @@
           dayClass += ' today';
         }
         
-        dateString =  currentYear + '-' + (currentMonth + 1) + '-' + ('0' + currentDate).slice(-2);
+        dateString =  currentYear + '-' + ('0'+(currentMonth + 1)).slice(-2) + '-' + ('0' + currentDate).slice(-2);
         html.push('<td class="apbscalendar_' + dateString + dayClass + '" data-year="' + currentYear + '" data-month="' + (currentMonth + 1) + '" data-day="' + currentDate + '"><span>' + currentDate + '</span></td>');
         if (current.getDay() === this.weekEnd) {
           html.push('</tr>');
@@ -159,13 +164,31 @@
     
     __renderEvents: function (events) {
       var that = this;
-      $.each(events.event, function () {
-        console.log(this.date);
+      $.each(events.events, function () {
         var eventDate = new Date(this.date);
-        if (eventDate.getFullYear() === that.year && eventDate.getMonth() === that.month) {
-          that.$element.find('td.apbscalendar_' + this.date).addClass('event');
+        if (isNaN(eventDate)) { // IE8 bug fix
+          eventDate = that.__dateFromISO(this.date);
+        }
+        var year = eventDate.getFullYear();
+        var month = eventDate.getMonth();
+        var day = eventDate.getDate();
+        //('0' + eventDate.getDate()).substr(-2,2);
+        if (year === that.year && month === that.month) {
+          var $day = that.$element.find( 'td.apbscalendar_' + year + '-' + ('0'+(month + 1)).slice(-2) + '-' + ('0' + parseInt(day)).slice(-2) );
+          $day.addClass('event');
+          var events = $day.data('calendar.events');
+          if (!events) {
+            events = [];
+          }
+          events.push(this);
+          $day.data('calendar.events', events);
         }
       });
+    },
+    
+    __dateFromISO: function (s) {
+      s = s.split(/\D/);
+      return new Date(Date.UTC(s[0], --s[1]||'', s[2]||'', s[3]||'', s[4]||'', s[5]||'', s[6]||''))
     },
     
     __isLeapYear: function (year) {
@@ -176,10 +199,6 @@
       this.$active = this.$element.find('.item.active');
       this.$items = this.$active.parent().children();
       return this.$items.index(this.$active);
-    },
-    
-    setEvents: function () {
-     
     },
     
     click: function (event) {
@@ -202,9 +221,8 @@
           }
           break;
         case 'td':
-          console.log($(target[0]).data());
+            this.getEvent($(target[0]));
           break;
-        
         }
       }
     },
@@ -212,22 +230,37 @@
     prev: function (target) {
       var ev = $(target).data();
       ev.type =  'onPrev';
-      this.$element.trigger(ev);
       this.__renderCalendar(new Date(this.year, this.month - 1, 1));
+      //console.log(ev);
+      this.$element.trigger(ev, this);
     },
     
     current: function (target) {
       var ev = $(target).data();
       ev.type =  'onCurrent';
-      this.$element.trigger(ev);
       this.__renderCalendar(new Date());
+      this.$element.trigger(ev, this);
     },
 
     next: function (target) {
       var ev = $(target).data();
       ev.type =  'onNext';
-      this.$element.trigger(ev);
       this.__renderCalendar(new Date(this.year, this.month + 1, 1));
+      //console.log(this.$element);
+      this.$element.trigger(ev, this);
+    },
+    
+    setEvents: function (json) {
+      this.__renderEvents(json);
+    },
+    
+    getEvent: function (target) {
+      var ev = $(target).data();
+      //console.log(ev);
+      ev.type =  'onClickEvent';
+      ev.calendar = this;
+      ev.dayTarget = target;
+      this.$element.trigger(ev);
     },
 
     loadEvents: function () {
@@ -235,8 +268,12 @@
         if (typeof this.events === 'function') {
           this.__renderEvents(this.events.apply(this, []));
         }
+        if (typeof this.events === 'object') {
+          this.__renderEvents(this);
+        }
       }
     }
+    
   };
 
 
@@ -250,7 +287,6 @@
       var $this = $(this),
           data = $this.data('calendar'),
           options = $.extend({}, $.fn.calendar.defaults, typeof option === 'object' && option);
-          
       if (!data) {
         $this.data('calendar', (data = new Calendar(this, options)));
       }

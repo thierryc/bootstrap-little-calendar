@@ -28,7 +28,7 @@
       <div class="row">
 				<div class="col-md-6">
 					<h2>Example</h2>
-					<div class="bootstrap-little-calendar"></div>
+					<div id="little-calendar" class="bootstrap-little-calendar"></div>
 				</div>
 				<div class="col-md-6">
 					<h2>Features</h2>
@@ -37,15 +37,34 @@
 						<li>Bootstrap</li>
 						<li>Little Calendar</li>
 						<li>Responsive</li>
-						<li>Ajax Events</li>
 						<li>Json Events</li>
+						<li>Intenationnal</li>
 					</ul>
 				</div>
       </div>
       <div class="row">
 				<div class="col-md-6">
+					<h2>Example in french</h2>
+					<div id="little-calendar-french" class="bootstrap-little-calendar"></div>
+				</div>
+				<div class="col-md-6">
+					<h2>Code</h2>
+					<pre>
+$('#little-calendar-french').calendar({ 
+	'events': {},
+	'weekStart': 1,
+	'days': ["Di", "Lu", "Ma", "Me", "Je", "Ve", "Sa"],
+	'months': ["Janvier","F\u00e9vrier","Mars","Avril","Mai","Juin","Juillet","Ao\u00fbt","Septembre","Octobre","Novembre","D\u00e9cembre"],
+	'todayString': "Aujourd‘hui"
+});
+					</pre>
+					<p></p>
+				</div>
+      </div>
+       <div class="row">
+				<div class="col-md-6">
 					<h2>Example Theme</h2>
-					<div class="bootstrap-little-calendar"></div>
+					<div id="little-calendar-google" class="bootstrap-little-calendar"></div>
 				</div>
 				<div class="col-md-6">
 					<h2>Features</h2>
@@ -77,8 +96,34 @@
     <script>
 			$(document).ready(function() {
 
-				var getEvents = function(){
+				var getEvents = function(calendar){
+				
+					
 
+					//var gclaData = 'http://www.google.com/calendar/feeds/varun.luthra.72%40gmail.com/public/full?alt=json-in-script&max-results=25&singleevents=false&futureevents=true&sortorder=descending&orderby=starttime&callback=?';
+					
+					var gclaData = 'https://www.google.com/calendar/feeds/u3jk61icootgrla2lbo1b0r5mg%40group.calendar.google.com/public/full?alt=json-in-script&max-results=25&singleevents=false&futureevents=true&sortorder=descending&orderby=starttime&callback=?';
+					
+					//var gclaData = 'http://www.google.com/calendar/feeds/developer-calendar@google.com/public/full?alt=json-in-scrip&orderby=starttime&max-results=15&singleevents=true&sortorder=ascending&futureevents=true&orderby=starttime&callback=?';
+					
+					$.getJSON(gclaData,function(data){
+		
+							//console.log(data);
+							
+							$.each(data.feed.entry, function(i, entry){
+									//console.log(entry);
+									//event += '<div class="eventHolder">'; 
+									//event += '<div class="eventTime">'+ entry.gd$when[0].startTime+"</div>";
+									//event += '<div class="eventName"><a href="'+ entry.link[0].href +'">'+ entry.title.$t + "</a></div>";
+									//event += '</div>';
+							});
+							
+							//this.$element.trigger('setEvents.calendar', { events: data.feed.entry, format: googleCalendar });
+							
+					});
+					
+					
+					
 					/*
 					$.ajax({
 						url: '/events/' + this.yy +'/'+ this.mm + '/.json',
@@ -98,29 +143,61 @@
 						]
 					}
 				};
-	
-				$('.bootstrap-little-calendar').calendar({ 
-						'events': getEvents,
+				
+				var getEventDateInThisMonth = function(day) {
+					var currentdate = new Date();
+					return currentdate.getFullYear() + '-' + ('0' + (currentdate.getMonth()+1)).substr(-2,2) + "-" + ('0' + day).substr(-2,2);
+				};
+
+				
+				$('#little-calendar').calendar({ 
+						'events': [
+							{ "date": "2014-02-03", "title":'toto', "content": "Capturer l'image dans la durée : le temps dans l'espace de la représentation"},
+							{ "date": getEventDateInThisMonth(7), "title":'toto', "content": "Capturer l'image dans la durée : le temps dans l'espace de la représentation"},
+							{ "date": getEventDateInThisMonth(25), "title":'tutu', "content": "Capturer l'image dans la durée : le temps dans l'espace de la représentation"},
+							{ "date": getEventDateInThisMonth(28), "title":'titi', "content": "Capturer l'image dans la durée : le temps dans l'espace de la représentation"}
+						],
 						'weekStart': 1,
 						//'days': <?php echo $days_string[$lang] ?>,
 						//'months': <?php echo json_encode($months_long) ?>,
 						//'todayString': <?php echo $today_string[$lang] ?>,
 					})
+					.on('onClickEvent', function(e){
+      			// 
+    			})
+    			.on('onClickDay', function(e){
+      			// 
+    			});
+					
+				$('#little-calendar-french').calendar({ 
+						//'events': {},
+						'weekStart': 1,
+						'days': ["Di", "Lu", "Ma", "Me", "Je", "Ve", "Sa"],
+						'months': ["Janvier","F\u00e9vrier","Mars","Avril","Mai","Juin","Juillet","Ao\u00fbt","Septembre","Octobre","Novembre","D\u00e9cembre"],
+						'todayString': "Aujourd‘hui"
+					})
+					.on('onInit', function(calendar){
+      			getEvents(calendar);
+    			})
+					.on('onClickEvent', function(e){
+      			// 
+    			});
+	
+				$('.bootstrap-little-calendar')
 					.on('eventUpdated', function(event){ 
-						console.log(event);
+						
 					})
 					.on('onPrev', function(event){ 
-						console.log("Next"); 
-						console.log(event);
+						
 					})
 					.on('onCurrent', function(event){ 
-						console.log("Prev");
-						console.log(event);
+						
 					})
 					.on('onNext', function(event){ 
-						console.log("Current"); 
-						console.log(event);
-					});
+						
+					}).on('onClickDay', function(e){
+      			// 
+    			});
 
 			});
     </script>
