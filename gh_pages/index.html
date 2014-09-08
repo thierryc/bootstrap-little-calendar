@@ -1,0 +1,129 @@
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    
+    <link rel="stylesheet" href="css/d69376b2.main.css">
+    <link rel="stylesheet" href="css/068cc4e6.bootstrap-little-calendar.css">
+
+    <script src="scripts/vendor/d7100892.modernizr.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      
+      <div class="jumbotron">
+        <h1>Bootstrap Little Calendar</h1>
+        <p>Bootstrap Little Calendar is a month view calendar.</p>
+      </div>
+      <div class="row">
+				<div class="col-md-6">
+					<h2>Example</h2>
+					<div class="bootstrap-little-calendar"></div>
+				</div>
+				<div class="col-md-6">
+					<h2>Features</h2>
+					<p>Bootstrap Little Calendar is a month view calendar.</p>
+					<ul>
+						<li>Bootstrap</li>
+						<li>Little Calendar</li>
+						<li>Responsive</li>
+						<li>Ajax Events</li>
+						<li>Json Events</li>
+					</ul>
+				</div>
+      </div>
+      <div class="row">
+				<div class="col-md-6">
+					<h2>Example Theme</h2>
+					<div class="bootstrap-little-calendar"></div>
+				</div>
+				<div class="col-md-6">
+					<h2>Features</h2>
+					<p>Bootstrap Little Calendar is a month view calendar.</p>
+				</div>
+      </div>
+    </div>
+
+
+    <!--[if lt IE 7]>
+      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+
+    <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
+    <script>
+      (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
+      function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
+      e=o.createElement(i);r=o.getElementsByTagName(i)[0];
+      e.src='//www.google-analytics.com/analytics.js';
+      r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
+      ga('create','UA-XXXXX-X');ga('send','pageview');
+    </script>
+    
+    
+    <script src="scripts/vendor/34ad1adc.jquery.js"></script>
+    
+    <script>
+			$(document).ready(function() {
+
+				var getEvents = function(){
+
+					/*
+					$.ajax({
+						url: '/events/' + this.yy +'/'+ this.mm + '/.json',
+						dataType: 'json',
+						context: this
+					}).done(function(data) {
+						console.log( "success" );
+						console.log( data );
+					});
+					*/
+		
+					return {
+					"event":
+						[
+							{ "date":"2013-11-25", "title":'', "content": "Capturer l'image dans la durée : le temps dans l'espace de la représentation 11 au 13 décembre"},
+							{ "date":"2013-11-01", "title":'', "content": "Capturer l'image dans la durée : le temps dans l'espace de la représentation 11 au 13 décembre"}
+						]
+					}
+				};
+	
+				$('.bootstrap-little-calendar').calendar({ 
+						'events': getEvents,
+						'weekStart': 1,
+						//'days': <?php echo $days_string[$lang] ?>,
+						//'months': <?php echo json_encode($months_long) ?>,
+						//'todayString': <?php echo $today_string[$lang] ?>,
+					})
+					.on('eventUpdated', function(event){ 
+						console.log(event);
+					})
+					.on('onPrev', function(event){ 
+						console.log("Next"); 
+						console.log(event);
+					})
+					.on('onCurrent', function(event){ 
+						console.log("Prev");
+						console.log(event);
+					})
+					.on('onNext', function(event){ 
+						console.log("Current"); 
+						console.log(event);
+					});
+
+			});
+    </script>
+
+        <script src="scripts/vendor/20bdd8fe.bootstrap.js"></script>
+        
+        <script src="scripts/f52b20fb.bootstrap-little-calendar.js"></script>
+        
+</body>
+</html>

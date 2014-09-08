@@ -16,7 +16,7 @@ module.exports = function (grunt) {
   // configurable paths
   var appConfig = {
     app: require('./bower.json').appPath || 'app',
-    dist: 'dist'
+    dist: 'gh_pages'
   };
 
   grunt.initConfig({

@@ -1,0 +1,156 @@
+/*
+ *
+ * bootstrap-little-calendar plugin
+ * Licensed under the MIT license
+ *
+ */
+/* variables */
+/* bootstrap/less/mixins */
+.bootstrap-little-calendar {
+  table-layout: fixed;
+}
+.bootstrap-little-calendar .year {
+  color: rgba(0, 0, 0, 0.3);
+  font-size: 1.5em;
+  float: right;
+  margin-right: 9px;
+}
+.bootstrap-little-calendar TABLE {
+  width: 100%;
+}
+.bootstrap-little-calendar .month {
+  color: rgba(0, 0, 0, 0.3);
+  font-size: 1.5em;
+  float: left;
+  margin-left: 9px;
+}
+.bootstrap-little-calendar TH {
+  color: rgba(0, 0, 0, 0.3);
+  text-align: center;
+  box-shadow: none;
+  height: 30px;
+}
+.bootstrap-little-calendar .calendar-header {
+  background-color: #428bca;
+}
+.bootstrap-little-calendar .calendar-header th {
+  color: #ffffff;
+}
+.bootstrap-little-calendar .date-header {
+  background-color: #6aa3d5;
+  padding-top: 8px;
+  padding-bottom: 28px;
+}
+.bootstrap-little-calendar TD {
+  height: 28px;
+}
+.bootstrap-little-calendar TD,
+.bootstrap-little-calendar TD.day {
+  color: rgba(0, 0, 0, 0.3);
+  text-align: center;
+  -webkit-transition: border 0.2s linear 0s, box-shadow 0.2s linear 0s, background 0.2s linear 0s;
+  transition: border 0.2s linear 0s, box-shadow 0.2s linear 0s, background 0.2s linear 0s;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-color: #eeeeee;
+  width: 14.286%;
+}
+.bootstrap-little-calendar TD.day:hover {
+  background: #eeeeee;
+  outline: 0 none;
+  cursor: pointer;
+  color: #FFFFFF;
+}
+.bootstrap-little-calendar TD.weekend {
+  color: rgba(0, 0, 0, 0.1);
+}
+.bootstrap-little-calendar TD.today {
+  font-weight: bold;
+  color: rgba(0, 0, 0, 0.6);
+}
+.bootstrap-little-calendar TD.today:hover {
+  background: #428bca;
+  outline: 0 none;
+  cursor: pointer;
+  color: #FFFFFF;
+}
+.bootstrap-little-calendar TD SPAN.weekday {
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 14%;
+  color: #FFFFFF;
+  font-size: 32px;
+  font-weight: bold;
+  padding: 2px 4px 2px;
+  white-space: nowrap;
+}
+.bootstrap-little-calendar TD SPAN.weekday:hover {
+  background-color: rgba(0, 0, 0, 0.25);
+}
+.bootstrap-little-calendar TFOOT,
+.bootstrap-little-calendar TFOOT TR TH.sel {
+  height: 27px;
+  width: 50px;
+  color: rgba(0, 0, 0, 0.3);
+  text-align: center;
+  -webkit-transition: border 0.2s linear 0s, background 0.2s linear 0s;
+  transition: border 0.2s linear 0s, background 0.2s linear 0s;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-color: rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+}
+.bootstrap-little-calendar TFOOT TR TH.sel:hover {
+  background: rgba(0, 0, 0, 0.1);
+  outline: 0 none;
+  cursor: pointer;
+  color: #FFFFFF;
+}
+.bootstrap-little-calendar TFOOT {
+  height: 30px;
+}
+.bootstrap-little-calendar .arrow {
+  padding: 0;
+}
+.bootstrap-little-calendar .arrow i {
+  margin-top: 8px;
+}
+.bootstrap-little-calendar .icon-arrow-left {
+  display: inline-block;
+  width: 6px;
+  height: 12px;
+  background-image: url("../img/icon-arrow-left.png");
+}
+.bootstrap-little-calendar .icon-arrow-right {
+  display: inline-block;
+  width: 6px;
+  height: 12px;
+  background-image: url("../img/icon-arrow-right.png");
+}
+.bootstrap-little-calendar .day.event {
+  background-color: #6aa3d5;
+  color: #ffffff;
+}
+.bootstrap-little-calendar .day.event:hover {
+  background-color: #428bca;
+}
+.bootstrap-little-calendar .calendar-body {
+  background-color: #FFF;
+}
+.bootstrap-little-calendar td.new,
+.bootstrap-little-calendar td.old {
+  background-color: #eeeeee;
+}
+@media (min-width: 768px) and (max-width: 979px) {
+  .bootstrap-little-calendar td {
+    height: 16px;
+  }
+  .bootstrap-little-calendar td.day {
+    height: 16px;
+  }
+}
+@media (min-width: 1200px) {
+  .bootstrap-little-calendar td {
+    height: 45px;
+  }
+  .bootstrap-little-calendar td.day {
+    height: 45px;
+  }
+}
