@@ -19,6 +19,6 @@
   "dependencies": {
     "bootstrap": "~3.0.0",
     "modernizr": "~2.6.2",
-    "jquery": "~1.9.1"
+    "jquery": ">=1.9.1"
   }
 }
