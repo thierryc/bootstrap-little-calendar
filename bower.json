@@ -1,12 +1,27 @@
 {
   "name": "bootstrap-little-calendar",
-  "version": "0.0.0",
-  "appPath": "demo",
+  "description": "",
+  "version": "0.0.1",
+  "homepage": "https://github.com/thierryc/bootstrap-little-calendar",
   "dependencies": {
     "bootstrap": "~3.0.0",
     "modernizr": "~2.6.2",
     "jquery": "~1.9.1"
   },
   "devDependencies": {}
+  "main": [
+    "demo/less/bootstrap-little-calendar.less",
+    "demo/css/bootstrap-little-calendar.css",
+    "demo/script/bootstrap-little-calendar.js"
+  ],
+  "ignore": [
+    ".*",
+    "_config.yml",
+    "CNAME",
+    "composer.json",
+    "CONTRIBUTING.md",
+    "docs",
+    "js/tests",
+    "test-infra"
+  ]
 }
-
