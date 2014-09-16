@@ -1,12 +1,16 @@
 {
   "name": "bootstrap-little-calendar",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "homepage": "https://github.com/thierryc/bootstrap-little-calendar",
   "authors": [
     "Thierry Charbonnel <thierry@creationflux.com>"
   ],
   "description": "a little calendar for Boostrap",
   "main": "demo/index.html",
+  "keywords": [
+    "calendar",
+    "Boostrap"
+  ],
   "license": "MIT",
   "ignore": [
     "**/.*",
@@ -18,6 +22,7 @@
   ],
   "dependencies": {
     "bootstrap": "~3.0.0",
+    "bootstrap_2": "bootstrap#2.3.2",
     "modernizr": "~2.6.2",
     "jquery": ">=1.9.1"
   }
